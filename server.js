@@ -1,21 +1,28 @@
 const express = require('express');
 const app = express();
+const fetch = require('node-fetch');
 
 const base = 'https://api.themoviedb.org/3';
-const api_key = process.env.api_key;
+const api_key = process.env.API_KEY;
 require('dotenv').config();
 
 
 app.listen(3000, () => console.log('listening on port 3000!'));
 app.use(express.static('public'));
+app.use(express.json({ limit: '1mb' }));
 
-app.get('/tv/popular', async (req, res) => {
-    const tv_popular_url = 'https://api.themoviedb.org/3/tv/popular?fb6a1d3f38c3d97f67df6d141f936f29'
-    fetch(tv_popular_url)
-        .then(res => {
-            console.log(res);
-        })
-        .catch(err => {
-            console.log(err);
-        })
-})
+app.get('/tv/popular', async(req, res) => {
+    const tvPopularUrl = 'https://api.themoviedb.org/3/tv/popular?'
+    const popularShowsResponse = await fetch(tvPopularUrl);
+    const popularShowsJSON = await popularShowsResponse.json();
+    res.json(popularShowsJSON);
+});
+
+app.get('/search/tv/:tvShow', async(req, res) => {
+    console.log(req.params.tvShow)
+    const queryString = req.params.tvShow.replace(" ", "%20");
+    const showSearchUrl = `https://api.themoviedb.org/3/search/tv?&query=${queryString}`
+    const showSearchResponse = await fetch(showSearchUrl);
+    const showSearchJSON = await showSearchResponse.json();
+    res.json(showSearchJSON);
+});
