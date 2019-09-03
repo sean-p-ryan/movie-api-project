@@ -6,14 +6,16 @@ const getPopularShows = async() => {
     const response = await fetch('/tv/popular');
     const json = await response.json();
     const shows = json.results;
+    console.log(shows);
     getShowNames(shows);
-    console.log("In get popular shows function")
 }
 
 const getShowNames = (shows) => {
     shows.forEach(show => {
         let showName = show.original_name;
         let newShow = document.createElement('li');
+        let showIdLink = document.createElement('a');
+        showIdLink.href = `${show.id}`;
         newShow.innerText = showName;
         showList.appendChild(newShow)
     })
@@ -25,13 +27,11 @@ searchButton.addEventListener("click", function(e) {
 });
 
 const searchShow = async() => {
-    console.log("Hello")
     const searchInput = document.getElementById('tvShowSearch').value;
     const tvShowUrl = `/search/tv/${searchInput}`;
     const showResponse = await fetch(tvShowUrl)
     const showData = await showResponse.json();
     const showResults = showData.results;
-    console.log(showResults);
     // clearPrevResults();
     displayShowResults(showResults)
 }

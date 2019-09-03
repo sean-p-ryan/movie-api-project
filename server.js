@@ -26,3 +26,7 @@ app.get('/search/tv/:tvShow', async(req, res) => {
     const showSearchJSON = await showSearchResponse.json();
     res.json(showSearchJSON);
 });
+
+app.get('/tv/:tv_id', (req, res) => {
+    res.sendFile(__dirname + "/public/show.html");
+})
