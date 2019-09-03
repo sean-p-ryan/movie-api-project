@@ -16,6 +16,8 @@ const getShowNames = (shows) => {
         let newShow = document.createElement('li');
         let showIdLink = document.createElement('a');
         showIdLink.href = `${show.id}`;
+
+        showIdLinknewShow.appendChild('a');
         newShow.innerText = showName;
         showList.appendChild(newShow)
     })
