@@ -24,11 +24,15 @@ app.get('/search/tv/:tvShow', async(req, res) => {
     const showSearchUrl = `${base}/search/tv?&query=${queryString}`
     const showSearchResponse = await fetch(showSearchUrl);
     const showSearchJSON = await showSearchResponse.json();
-    res.json(showSearchJSON);
+    // res.json(showSearchJSON);
 });
 
-app.get('/tv/:tv_id', (req, res) => {
+app.get('/tv/:tv_id', async (req, res) => {
     res.sendFile(__dirname + "/public/show.html");
     const tvId = req.params.tv_id;
-    const showInfoUrl = `${base}/tv/${tvId}`
+    const showInfoUrl = `${base}/tv/${tvId}?api_key=${process.env.api_key}`;
+    const showInfoResponse = await fetch(showInfoUrl);
+    const showInfoJSON = await showInfoResponse.json();
+    res.json(showInfoResponse);
+    console.log(showInfoJSON);
 })
