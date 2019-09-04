@@ -24,15 +24,16 @@ app.get('/search/tv/:tvShow', async(req, res) => {
     const showSearchUrl = `${base}/search/tv?&query=${queryString}`
     const showSearchResponse = await fetch(showSearchUrl);
     const showSearchJSON = await showSearchResponse.json();
-    // res.json(showSearchJSON);
 });
 
-app.get('/tv/:tv_id', async (req, res) => {
+app.get('/tv/:tv_id', async(req, res) => {
     res.sendFile(__dirname + "/public/show.html");
-    const tvId = req.params.tv_id;
-    const showInfoUrl = `${base}/tv/${tvId}?api_key=${process.env.api_key}`;
+});
+
+app.get('/show/data/:showId', async(req, res) => {
+    const showId = req.params.showId;
+    const showInfoUrl = `${base}/tv/${showId}?api_key=${process.env.API_KEY}`;
     const showInfoResponse = await fetch(showInfoUrl);
     const showInfoJSON = await showInfoResponse.json();
-    res.json(showInfoResponse);
-    console.log(showInfoJSON);
+    res.json(showInfoJSON);
 })
