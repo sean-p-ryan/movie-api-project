@@ -10,7 +10,7 @@ const getShowData = async () => {
     const showId = parseInt(paramArray[paramArray.length - 1].toString());
     await fetch(`/show/data/${showId}`)
         .then(response => response.json())
-        .then(data => { 
+        .then(data => {     
             updateShowInfoText(data)               
         })
         .catch(err => console.log(err))
