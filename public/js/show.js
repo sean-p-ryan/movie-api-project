@@ -1,11 +1,16 @@
-const showInfo = `<div class="show-info-container">
+var showInfoText = {
+    title: "Here's the title!",
+    description: "Here's a description of the show.",
+    firstAir: "September 3, 2019"
+}
+
+var showInfoMarkup = document.createElement(`<div class="show-info-container">
 <h1 class="show-title">
-    <a href="">Test Show Title</a>
+    <a href="">${showInfoText.title}</a>
 </h1>
-<p class="show-description">Test show description. Lorem, ipsum dolor sit amet consectetur adipisicing elit. Doloremque, maiores soluta eos deserunt est aspernatur dolore odio eum alias eius? Fugiat omnis cupiditate natus quia necessitatibus perspiciatis magnam aspernatur
-    id. Lorem ipsum dolor, sit amet consectetur adipisicing elit. Minima officia sunt distinctio voluptas eaque ullam itaque vitae omnis beatae repellendus.</p>
-<p><span class="show-title">This show</span> first aired on <span class="first-air"></span></p>
-</div>`
+<p class="show-description">${showInfoText.description}</p>
+<p>${showInfoText.title} first aired on ${showInfoText.firstAir}</p>
+</div>`)
 
 const getShowData = async() => {
     const url = window.location.href;
@@ -18,10 +23,6 @@ const getShowData = async() => {
 
 const addShowData = (showDataJSON) => {
     document.body.appendChild(showInfo);
-}
-
-const getShowTitle = (data) => {
-
 }
 
 getShowData();

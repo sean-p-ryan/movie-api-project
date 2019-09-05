@@ -28,18 +28,16 @@ searchButton.addEventListener("click", function(e) {
 });
 
 const searchShow = async() => {
+    console.log('in search show')
     const searchInput = document.getElementById('tvShowSearch').value;
     const tvShowUrl = `/search/tv/${searchInput}`;
+    console.log(tvShowUrl)
     const showResponse = await fetch(tvShowUrl)
+    console.log('here\s the show data ' + showResponse)
     const showData = await showResponse.json();
     const showResults = showData.results;
-    // clearPrevResults();
+    console.log(showResults)
     displayShowResults(showResults)
-}
-
-const clearPrevResults = () => {
-    let previousSearches = document.querySelectorAll(".show-result");
-    showSearchArea.removeChild(previousSearches);
 }
 
 const displayShowResults = (results) => {
